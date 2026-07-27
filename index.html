@@ -15,11 +15,47 @@
         </div>
         <div id="links">
             <ul>
-                <li><button id="btn">Add Book</button></li>
+                <li><button id="addBtn">Add Book</button></li>
                 <li><a href="">About</a></li>
                 <li><a href="">Sign Up</a></li>
             </ul>
         </div>
     </header>
+    <main>
+        <div id="temp"></div>
+        <div id="book-form">
+            <form action="" method="post">
+                <div>
+                    <h1>Library</h1>
+                    <p>Fill Out The Book Details ^_^</p>
+                    <hr>
+                </div>
+                <div>
+                    <label for="book-name">Book Name</label>
+                    <input type="text" id="book-name" name="book-name">
+                </div>
+                <div>
+                    <label for="author">Author</label>
+                    <input type="text" id="author" name="author">
+                </div>
+                <div>
+                    <label for="publication">Year of Publication</label>
+                    <input type="number" id="publication" name="publication" min="0" max="2027">
+                </div>
+                <div>
+                    <label for="status">Current Status</label>
+                    <select id="status">
+                        <option value="reading">Reading</option>
+                        <option value="completed">Completed</option>
+                        <option value="plan to read">Plan To Read</option>
+                    </select>
+                </div>
+                <div id="buttons">
+                    <button type="button" id="submit-button">Submit</button>
+                    <button type="button" id="cancel-button">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </main>
 </body>
 </html>
