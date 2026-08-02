@@ -3,17 +3,36 @@ const bookForm = document.querySelector('#book-form');
 const submitBtn = document.querySelector('#submit-button');
 const temp = document.querySelector('#temp');
 
+// Book Details
 const bookName = document.querySelector('#book-name');
+const name = document.querySelector('.name')
+
 const author = document.querySelector('#author');
+const authorName = document.querySelector('.author-name');
+
 const publication = document.querySelector('#publication');
 const status = document.querySelector('#status');
+
+// Code
 
 const library = [];
 
 function loop() {
-    for (let i = 0; i < library.length; i++) {
+    temp.textContent = '';
+    for (let x of library) {
         const div = document.createElement('div');
+        const name = document.createElement('div');
+        const authorName = document.createElement('div');
+
+        name.classList.add('.name');
+        authorName.classList.add('.author-name');
+
+        div.appendChild(name);
+        div.appendChild(authorName);
+
         temp.appendChild(div);
+        name.textContent = x.bookName;
+        authorName.textContent = x.author;
     }
 }
 
@@ -37,13 +56,11 @@ function Book(bookName, author, publication, status) {
 function addBook() {
     const book = new Book(bookName.value, author.value, publication.value, status.value);
     library.push(book);
-    const bookGrid = document.createElement('div');
-    temp.appendChild(bookGrid);
 }
 
 submitBtn.addEventListener('click', (event) => {
     addBook();
-    console.log(library);
+    loop();
     clear();
     bookForm.style.display = 'none';
 });
