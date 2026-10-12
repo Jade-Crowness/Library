@@ -1,0 +1,85 @@
+/* Permanent Changes */
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: serif;
+}
+
+body, html {
+    height: 100vh;
+    width: 100vw;
+    background-color: #fff4eb;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+/* ______________________________________ */
+
+body {
+    display: flex;
+    flex-direction: column;   
+    justify-content: space-between;
+}
+
+#header {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+#header-left {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    align-items: center;
+    gap: 5px;
+}
+
+h1 {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    color: #3d1534;
+}
+
+#header-right {
+    display: grid;
+    align-items: center;
+    justify-content: end;
+
+}
+
+#header-left > img {
+    height: 100px;
+    width: auto;
+}
+
+/* Buttons + Links */
+
+#add-book {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    background-color: #161315;
+    color: #f0d9e4;
+    margin-right: 20px;
+    padding: 10px;
+    border-radius: 30px;
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#add-book:hover {
+    cursor: pointer;
+    background-color: #f0d9e4;
+    color: #161315;
+}

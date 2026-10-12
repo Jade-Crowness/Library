@@ -1,66 +1,121 @@
-const addBtn = document.querySelector('#addBtn');
-const bookForm = document.querySelector('#book-form');
-const submitBtn = document.querySelector('#submit-button');
-const temp = document.querySelector('#temp');
+// Query Selectors
 
-// Book Details
-const bookName = document.querySelector('#book-name');
-const name = document.querySelector('.name')
+const dialog = document.querySelector('dialog');
+const submitBtn = document.querySelector('#submitBtn');
+const book_name = document.querySelector('#book_name');
+const author_name = document.querySelector('#author_name');
+const publication_year = document.querySelector('#publication_year');
+const current_status = document.querySelector('#current_status');
+const main = document.querySelector('#main-content');
+const form = document.querySelector("form");
+const closeBtn = document.querySelector("#close_btn")
 
-const author = document.querySelector('#author');
-const authorName = document.querySelector('.author-name');
+// Main Code
 
-const publication = document.querySelector('#publication');
-const status = document.querySelector('#status');
+let library = [];
 
-// Code
+function Book(name, author, year, haveRead, id) {
+    this.name = name;
+    this.author = author;
+    this.year = year;
+    this.haveRead = haveRead;
+    this.id = id;
 
-const library = [];
+}
 
-function loop() {
-    temp.textContent = '';
-    for (let x of library) {
-        const div = document.createElement('div');
-        const name = document.createElement('div');
-        const authorName = document.createElement('div');
+Book.prototype.toggle = function() {
+    switch (this.haveRead) {
+        case "Plan To Read" :
+            this.haveRead = "Reading";
+            break;
+        case "Reading" :
+            this.haveRead = "Completed";
+            break;
+        case "Completed" :
+            this.haveRead = "Reading";
+            break;
+    };
+};
 
-        name.classList.add('.name');
-        authorName.classList.add('.author-name');
+function addBookToLibrary(bookName, authorName, PublicationDate, currentStatus, uniqueID) {
+    
+    const book = new Book(bookName, authorName, PublicationDate, currentStatus, uniqueID);
+    library.push(book);
+    dialog.close();
+    form.reset();
+}
 
-        div.appendChild(name);
-        div.appendChild(authorName);
+function displayBook() {
+    main.textContent = "";
+    if (library.length > 0) {
+        for (let x of library) {
+            // Creating Cards of Library
+            const cardDiv = document.createElement("div");
+            cardDiv.classList.add("library-card");
+            // Creating Content Divs of Library
+            const nameOfBookDiv = document.createElement("div");
+            const authorOfBookDiv = document.createElement("div");
+            const yearOfBookDiv = document.createElement("div");
+            const statusOfBookDiv = document.createElement("div");
 
-        temp.appendChild(div);
-        name.textContent = x.bookName;
-        authorName.textContent = x.author;
+            const buttonContainerDiv = document.createElement("div");
+            buttonContainerDiv.classList.add("card_buttons");
+
+            const deleteBtn = document.createElement("button");
+            const toggleStatusBtn = document.createElement("button");
+
+            deleteBtn.classList.add('delete_button');
+            // Contents of Library
+            const nameOfBook = document.createTextNode(`Name : ${x.name}`);
+            const authorOfBook = document.createTextNode(`Author : ${x.author}`);
+            const yearOfBook = document.createTextNode(`Publication : ${x.year}`);
+            const statusOfBook = document.createTextNode(`Reading Status : ${x.haveRead}`);
+            cardDiv.dataset.idData = `${x.id}`;
+            deleteBtn.textContent = 'Delete';
+            toggleStatusBtn.textContent = 'Toggle Status'
+            // Appending Texts to Content Divs
+            nameOfBookDiv.appendChild(nameOfBook)
+            authorOfBookDiv.appendChild(authorOfBook)
+            yearOfBookDiv.appendChild(yearOfBook)
+            statusOfBookDiv.appendChild(statusOfBook)
+            // Appending The Contents
+            buttonContainerDiv.appendChild(deleteBtn);
+            buttonContainerDiv.appendChild(toggleStatusBtn);
+
+            cardDiv.appendChild(nameOfBookDiv);
+            cardDiv.appendChild(authorOfBookDiv);
+            cardDiv.appendChild(yearOfBookDiv);
+            cardDiv.appendChild(statusOfBookDiv);
+            cardDiv.appendChild(buttonContainerDiv);
+            main.appendChild(cardDiv)
+
+            deleteBtn.addEventListener('click', function(e) {
+                for (let x of library) {
+                    if (`${x.id}` == cardDiv.dataset.idData) {
+                        library = library.filter(elm => elm !== x);
+                    }
+                }
+                displayBook();
+            })
+            toggleStatusBtn.addEventListener('click', function(e) {
+                for (let x of library) {
+                    if (`${x.id}` == cardDiv.dataset.idData) {
+                        x.toggle();
+                    }
+                }
+                displayBook();
+            })
+        }
     }
 }
 
-const clear = function() {
-    bookName.value = "";
-    author.value = "";
-    publication.value = 0;
-}
-
-addBtn.addEventListener('click', (event) => {
-    bookForm.style.display = 'block';
+submitBtn.addEventListener('click', function(e) {
+    addBookToLibrary(book_name.value, author_name.value, publication_year.value, current_status.value, self.crypto.randomUUID());
+    displayBook();
+    e.preventDefault();
 });
 
-function Book(bookName, author, publication, status) {
-    this.bookName = bookName;
-    this.author = author;
-    this.publication = publication;
-    this.status = status;
-}
-
-function addBook() {
-    const book = new Book(bookName.value, author.value, publication.value, status.value);
-    library.push(book);
-}
-
-submitBtn.addEventListener('click', (event) => {
-    addBook();
-    loop();
-    clear();
-    bookForm.style.display = 'none';
-});
+closeBtn.addEventListener('click', function(e) {
+    dialog.close();
+    form.reset();
+})

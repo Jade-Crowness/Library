@@ -1,0 +1,31 @@
+#main-content {
+    display: grid;
+    grid-template-columns: repeat(4, 300px);
+    gap: 10px;
+    justify-content: center;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.library-card {
+    height: 300px;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    background-color: #312a44;
+    align-items: center;
+    padding: 20px;
+    color: #f8ecff;
+    border-radius: 25px;
+    border: 2px solid #e6d6f7;
+    box-shadow: 10px 10px 5px #e6d6f7;
+}
+
+.card_buttons {
+    display: grid;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.card_buttons > * {
+    padding: 6px;
+}

@@ -1,0 +1,45 @@
+dialog::backdrop {
+    background-color: gray;
+}
+
+dialog {
+    align-self: center;
+    justify-self: center;
+    border-color: pink;
+    padding: 15px;
+    width: 80%;
+}
+
+input, select {
+    border: none;
+    width: 100%;
+    display: block;
+    margin: 5px 0px 20px 0px;
+    background: #f1f1f1;
+    padding: 15px;
+}
+
+input:focus {
+    outline: none;
+    background-color: antiquewhite;
+}
+
+label {
+    display: block;
+    width: 100%;
+}
+
+/* Buttons */
+#formBtn {
+    display: grid;
+    gap: 5px;
+    grid-template-columns: 100px 100px;
+}
+
+#formBtn > * {
+    padding: 10px;
+}
+
+#formBtn > *:hover {
+    cursor: pointer;
+}
